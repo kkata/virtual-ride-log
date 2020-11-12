@@ -12,27 +12,29 @@ const Strava = () => {
       <ul>
         {stravaActivity.map(activity => (
           <li key={activity.id}>
-            <p>{activity.date}</p>
-            <p>{activity.name}</p>
-            <dl>
-              <dt>タイム</dt>
-              <dd>
-                <span>
-                  {dayjs.duration(activity.moving_time * 1000).hours()}時間
-                </span>
-                <span>
-                  {dayjs.duration(activity.moving_time * 1000).minutes()}分
-                </span>
-              </dd>
-            </dl>
-            <dl>
-              <dt>距離</dt>
-              <dd>{Math.round((activity.distance / 1000) * 100) / 100}km</dd>
-            </dl>
-            <dl>
-              <dt>獲得高度</dt>
-              <dd>{activity.total_elevation_gain}m</dd>
-            </dl>
+            <Link to={`/${activity.id}/`}>
+              <p>{activity.date}</p>
+              <p>{activity.name}</p>
+              <dl>
+                <dt>タイム</dt>
+                <dd>
+                  <span>
+                    {dayjs.duration(activity.moving_time * 1000).hours()}時間
+                  </span>
+                  <span>
+                    {dayjs.duration(activity.moving_time * 1000).minutes()}分
+                  </span>
+                </dd>
+              </dl>
+              <dl>
+                <dt>距離</dt>
+                <dd>{Math.round((activity.distance / 1000) * 100) / 100}km</dd>
+              </dl>
+              <dl>
+                <dt>獲得高度</dt>
+                <dd>{activity.total_elevation_gain}m</dd>
+              </dl>
+            </Link>
           </li>
         ))}
       </ul>
