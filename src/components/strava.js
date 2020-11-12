@@ -9,13 +9,16 @@ const Strava = () => {
   const stravaActivity = useStrava()
   return (
     <>
-      <ul>
+      <ul className="divide-y divide-gray-400 mt-10">
         {stravaActivity.map(activity => (
-          <li key={activity.id}>
-            <Link to={`/${activity.id}/`}>
-              <p>{activity.date}</p>
-              <p>{activity.name}</p>
-              <dl>
+          <li key={activity.id} className="pt-1 pb-1">
+            <Link
+              to={`/${activity.id}/`}
+              className="grid grid-cols-5 gap-3 items-center hover:bg-gray-200 pt-1 pb-1"
+            >
+              <p className="text-center">{activity.date}</p>
+              <p className="text-center">{activity.name}</p>
+              <dl className="text-center">
                 <dt>タイム</dt>
                 <dd>
                   <span>
@@ -26,11 +29,11 @@ const Strava = () => {
                   </span>
                 </dd>
               </dl>
-              <dl>
+              <dl className="text-center">
                 <dt>距離</dt>
                 <dd>{Math.round((activity.distance / 1000) * 100) / 100}km</dd>
               </dl>
-              <dl>
+              <dl className="text-center">
                 <dt>獲得高度</dt>
                 <dd>{activity.total_elevation_gain}m</dd>
               </dl>
