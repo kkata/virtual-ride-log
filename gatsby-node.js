@@ -3,9 +3,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     {
       allStravaActivity {
         nodes {
-          activity {
-            id
-          }
+          id
         }
       }
     }
@@ -19,10 +17,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   details.forEach(detail => {
     actions.createPage({
-      path: String(detail.activity.id),
+      path: String(detail.id),
       component: require.resolve("./src/templates/detail.js"),
       context: {
-        id: detail.activity.id,
+        id: detail.id,
       },
     })
   })
