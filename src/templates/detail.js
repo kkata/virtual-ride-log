@@ -6,35 +6,29 @@ import duration from "dayjs/plugin/duration"
 dayjs.extend(duration)
 
 export const query = graphql`
-  query($id: Float!) {
-    stravaActivity(activity: { id: { eq: $id } }) {
-      activity {
-        average_speed
-        name
-        achievement_count
-        average_heartrate
-        distance
-        moving_time
-        kilojoules
-        id
-        average_cadence
-        average_watts
-        max_heartrate
-        max_speed
-        max_watts
-        weighted_average_watts
-        start_date_local(formatString: "YYYY/MM/DD dddd", locale: "ja")
-        total_elevation_gain
-      }
+  query($id: String) {
+    stravaActivity(id: { eq: $id }) {
+      average_speed
+      name
+      achievement_count
+      average_heartrate
+      distance
+      moving_time
+      kilojoules
+      id
+      average_cadence
+      average_watts
+      max_heartrate
+      max_speed
+      max_watts
+      weighted_average_watts
+      start_date_local(formatString: "YYYY/MM/DD dddd", locale: "ja")
+      total_elevation_gain
     }
   }
 `
 
-const DetailTemplate = ({
-  data: {
-    stravaActivity: { activity: detail },
-  },
-}) => (
+const DetailTemplate = ({ data: { stravaActivity: detail } }) => (
   <Layout>
     <p className="text-gray-600 text-sm">{detail.start_date_local}</p>
     <h1 className="text-2xl">{detail.name}</h1>
@@ -105,7 +99,6 @@ const DetailTemplate = ({
         </tr>
       </tbody>
     </table>
-
     <Link to="/" className="inline-block mt-16 hover:underline">
       &lt; back home
     </Link>

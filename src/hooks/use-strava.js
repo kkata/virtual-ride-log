@@ -4,29 +4,27 @@ const useStrava = () => {
   const data = useStaticQuery(graphql`
     {
       allStravaActivity(
-        filter: { activity: { type: { in: ["VirtualRide"] } } }
-        sort: { fields: activity___start_date_local, order: DESC }
+        filter: { type: { in: "VirtualRide" } }
+        sort: { fields: start_date_local, order: DESC }
       ) {
         nodes {
-          activity {
-            id
-            name
-            distance
-            start_date_local(formatString: "YYYY/MM/DD dddd", locale: "ja")
-            moving_time
-            total_elevation_gain
-          }
+          id
+          name
+          distance
+          moving_time
+          total_elevation_gain
+          start_date_local(formatString: "YYYY/MM/DD dddd", locale: "ja")
         }
       }
     }
   `)
   return data.allStravaActivity.nodes.map(node => ({
-    id: node.activity.id,
-    date: node.activity.start_date_local,
-    name: node.activity.name,
-    distance: node.activity.distance,
-    moving_time: node.activity.moving_time,
-    total_elevation_gain: node.activity.total_elevation_gain,
+    id: node.id,
+    date: node.start_date_local,
+    name: node.name,
+    distance: node.distance,
+    moving_time: node.moving_time,
+    total_elevation_gain: node.total_elevation_gain,
   }))
 }
 
