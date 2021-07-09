@@ -7,11 +7,16 @@ dayjs.extend(duration)
 
 const Strava = () => {
   const stravaActivity = useStrava()
+  let id
+  const setId = str => {
+    if (str === id) return
+    return (id = str)
+  }
   return (
     <>
       <ul className="divide-y divide-gray-400 mt-10">
         {stravaActivity.map(activity => (
-          <li key={activity.id} className="pt-1 pb-1">
+          <li id={setId(activity.date)} key={activity.id} className="pt-1 pb-1">
             <Link
               to={`/${activity.id}/`}
               className="grid grid-cols-5 gap-3 items-center hover:bg-gray-200 pt-1 pb-1"
