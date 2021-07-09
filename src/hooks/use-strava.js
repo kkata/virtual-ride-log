@@ -13,7 +13,7 @@ const useStrava = () => {
           distance
           moving_time
           total_elevation_gain
-          start_date_local(formatString: "YYYY/MM/DD dddd", locale: "ja")
+          start_date_local(formatString: "YYYY/MM/DD", locale: "ja")
         }
       }
     }
@@ -21,6 +21,7 @@ const useStrava = () => {
   return data.allStravaActivity.nodes.map(node => ({
     id: node.id,
     date: node.start_date_local,
+    dateForCal: node.start_date,
     name: node.name,
     distance: node.distance,
     moving_time: node.moving_time,
